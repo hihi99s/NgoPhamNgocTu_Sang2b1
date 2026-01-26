@@ -40,20 +40,22 @@ const hasExpensiveProduct = products.some(p => p.price > 30000000);
 console.log("\n--- 5. Some (Price > 30,000,000) ---");
 console.log("Has expensive product:", hasExpensiveProduct);
 
-// 6. Every: Are all products in 'Accessories' category?
-const isAllAccessories = products.every(p => p.category === "Accessories");
-console.log("\n--- 6. Every (All are Accessories?) ---");
-console.log("Are all accessories:", isAllAccessories);
+// 6. Every: Are all products in 'Accessories' category available?
+const isAllAccessoriesAvailable = products
+    .filter(p => p.category === "Accessories")
+    .every(p => p.isAvailable);
+console.log("\n--- 6. Every (All Accessories are available?) ---");
+console.log("Are all accessories available:", isAllAccessoriesAvailable);
 
-// 7. Reduce: Calculate total quantity of all products
-const totalQuantity = products.reduce((total, p) => total + p.quantity, 0);
-console.log("\n--- 7. Reduce (Total Quantity) ---");
-console.log("Total Quantity:", totalQuantity);
+// 7. Reduce: Calculate total inventory value (price * quantity)
+const totalInventoryValue = products.reduce((total, p) => total + (p.price * p.quantity), 0);
+console.log("\n--- 7. Reduce (Total Inventory Value) ---");
+console.log("Total Inventory Value:", totalInventoryValue);
 
 // 8. For...of: Print product names
-console.log("\n--- 8. For...of (Product Names) ---");
+console.log("\n--- 8. For...of (Product Details) ---");
 for (const p of products) {
-    console.log(p.name);
+    console.log(`${p.name} - ${p.category} - ${p.isAvailable ? "Available" : "Not Available"}`);
 }
 
 // 9. For...in: Print properties of the first product
